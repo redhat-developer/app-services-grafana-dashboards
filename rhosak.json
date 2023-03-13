@@ -889,12 +889,12 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "kafka_topic:kafka_log_log_size:sum",
+          "expr": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=\"$kafka_broker\",topic_name=~\"$kafka_topic\",partition_id=~\"$kafka_partition\"}",
           "format": "time_series",
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{topic}}:{{partition}}",
+          "legendFormat": "{{topic_name}}:{{partition_id}}",
           "refId": "A"
         }
       ],
