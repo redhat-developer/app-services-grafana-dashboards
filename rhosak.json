@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1678737515310,
+  "iteration": 1678738842660,
   "links": [],
   "panels": [
     {
@@ -614,7 +614,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "${DS_PROMETHEUS}",
-      "description": "Kafka broker pods disk usage",
+      "description": "Kafka broker available space per disk.\n\nLegend label format: data-<disk>-<cluster name>-kafka-<broker ID>",
       "fieldConfig": {
         "defaults": {},
         "overrides": []
@@ -711,7 +711,7 @@
     {
       "cacheTimeout": null,
       "datasource": "${DS_PROMETHEUS}",
-      "description": "Total partitions offline",
+      "description": "Total partitions",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -838,7 +838,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=\"$kafka_broker\",topic_name=~\"$kafka_topic\",partition_id=~\"$kafka_partition\"}",
+          "expr": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=~\"$kafka_broker\",topic_name=~\"$kafka_topic\",partition_id=~\"$kafka_partition\"}",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -1008,7 +1008,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "Prometheus",
           "value": "Prometheus"
         },
