@@ -137,7 +137,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}[1m]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -227,7 +227,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_out_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}[1m]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_out_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -299,7 +299,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_messages_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}[1m]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_messages_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}[1m]))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -418,7 +418,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_messages_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}[1m]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_messages_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -508,7 +508,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(kafka_controller_kafkacontroller_offline_partitions_count{statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"})",
+          "expr": "sum(kafka_controller_kafkacontroller_offline_partitions_count{statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"})",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -584,7 +584,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}[1m]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -595,7 +595,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_out_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}[1m]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_out_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -698,7 +698,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "kubelet_volume_stats_available_bytes{persistentvolumeclaim=~\"data(-[0-9]+)?-$kafka_broker-kafka-[0-9]+\"}",
+          "expr": "kubelet_volume_stats_available_bytes{persistentvolumeclaim=~\"data(-[0-9]+)?-$strimzi_cluster_name-kafka-$kafka_broker\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -818,7 +818,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(kafka_controller_kafkacontroller_global_partition_count)",
+          "expr": "sum(kafka_controller_kafkacontroller_global_partition_count{strimzi_io_cluster=\"$strimzi_cluster_name\"})",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -991,7 +991,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "kubelet_volume_stats_used_bytes{persistentvolumeclaim=~\"data(-[0-9]+)?-$kafka_broker-kafka-[0-9]+\"}",
+          "expr": "kubelet_volume_stats_used_bytes{persistentvolumeclaim=~\"data(-[0-9]+)?-$strimzi_cluster_name-kafka-$kafka_broker\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -1001,7 +1001,7 @@
         },
         {
           "exemplar": true,
-          "expr": "kafka_broker_quota_softlimitbytes{statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}",
+          "expr": "kafka_broker_quota_softlimitbytes{statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Limit {{statefulset_kubernetes_io_pod_name}}",
@@ -1061,6 +1061,27 @@
   ],
   "templating": {
     "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Datasource",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
       {
         "allValue": null,
         "current": {},
