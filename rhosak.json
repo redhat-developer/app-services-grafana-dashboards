@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.11"
+      "version": "7.5.17"
     },
     {
       "type": "panel",
@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1637171817491,
+  "iteration": 1678737515310,
   "links": [],
   "panels": [
     {
@@ -270,7 +270,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.17",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -309,7 +309,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:758",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -318,7 +317,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:759",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -537,7 +535,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.17",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -588,7 +586,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:909",
           "decimals": null,
           "format": "bytes",
           "label": "",
@@ -598,7 +595,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:910",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -651,7 +647,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.17",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -691,7 +687,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:346",
           "format": "bytes",
           "label": null,
           "logBase": 1,
@@ -700,7 +695,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:347",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -833,7 +827,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.17",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -873,7 +867,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:187",
           "format": "bytes",
           "label": null,
           "logBase": 1,
@@ -882,7 +875,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:188",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -935,7 +927,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.17",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -983,7 +975,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:346",
           "format": "bytes",
           "label": null,
           "logBase": 1,
@@ -992,7 +983,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:347",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1179,5 +1169,5 @@
   "timezone": "",
   "title": "Red Hat OpenShift Streams for Apache Kafka",
   "uid": "86cc98e66c294b299b37102f0cc74ead",
-  "version": 8
+  "version": 10
 }
