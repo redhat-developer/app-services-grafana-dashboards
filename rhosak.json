@@ -1065,34 +1065,7 @@
         "allValue": null,
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "",
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": "Namespace",
-        "multi": false,
-        "name": "kubernetes_namespace",
-        "options": [],
-        "query": {
-          "query": "query_result(kafka_server_replicamanager_leadercount)",
-          "refId": "Prometheus-kubernetes_namespace-Variable-Query"
-        },
-        "refresh": 1,
-        "regex": "/.*namespace=\"([^\"]*).*/",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {},
-        "datasource": "${DS_PROMETHEUS}",
-        "definition": "",
+        "definition": "kafka_instance_connection_limit",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1102,11 +1075,11 @@
         "name": "strimzi_cluster_name",
         "options": [],
         "query": {
-          "query": "query_result(kafka_server_replicamanager_leadercount{namespace=\"$kubernetes_namespace\"})",
-          "refId": "Prometheus-strimzi_cluster_name-Variable-Query"
+          "query": "kafka_instance_connection_limit",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "regex": "/.*strimzi_io_cluster=\"([^\"]*).*/",
+        "regex": "/.*instance_name=\"([^\"]*).*/",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
@@ -1119,7 +1092,7 @@
         "allValue": ".*",
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "",
+        "definition": "kafka_instance_connection_limit{instance_name=\"$strimzi_cluster_name\"}",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1129,11 +1102,11 @@
         "name": "kafka_broker",
         "options": [],
         "query": {
-          "query": "query_result(kafka_server_replicamanager_leadercount{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\"})",
-          "refId": "Prometheus-kafka_broker-Variable-Query"
+          "query": "kafka_instance_connection_limit{instance_name=\"$strimzi_cluster_name\"}",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "regex": "/.*pod_name=\"$strimzi_cluster_name-([^\"]*).*/",
+        "regex": "/.*broker_id=\"([^\"]*).*/",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
@@ -1146,7 +1119,7 @@
         "allValue": ".+",
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "",
+        "definition": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=\"$kafka_broker\"}",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1156,11 +1129,11 @@
         "name": "kafka_topic",
         "options": [],
         "query": {
-          "query": "query_result(kafka_cluster_partition_replicascount{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"})",
-          "refId": "Prometheus-kafka_topic-Variable-Query"
+          "query": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=\"$kafka_broker\"}",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "regex": "/.*topic=\"([^\"]*).*/",
+        "regex": "/.*topic_name=\"([^\"]*).*/",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
@@ -1173,7 +1146,7 @@
         "allValue": ".*",
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "",
+        "definition": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=\"$kafka_broker\",topic_name=\"$kafka_topic\"}",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1183,11 +1156,11 @@
         "name": "kafka_partition",
         "options": [],
         "query": {
-          "query": "query_result(kafka_log_log_size{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\",topic=~\"$kafka_topic\"})",
-          "refId": "Prometheus-kafka_partition-Variable-Query"
+          "query": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=\"$kafka_broker\",topic_name=\"$kafka_topic\"}",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "regex": "/.*partition=\"([^\"]*).*/",
+        "regex": "/.*partition_id=\"([^\"]*).*/",
         "skipUrlSync": false,
         "sort": 3,
         "tagValuesQuery": "",
