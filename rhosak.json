@@ -1085,7 +1085,7 @@
         "allValue": ".+",
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=\"$kafka_broker\"}",
+        "definition": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=~\"$kafka_broker\"}",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1095,7 +1095,7 @@
         "name": "kafka_topic",
         "options": [],
         "query": {
-          "query": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=\"$kafka_broker\"}",
+          "query": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=~\"$kafka_broker\"}",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -1112,7 +1112,7 @@
         "allValue": ".*",
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=\"$kafka_broker\",topic_name=\"$kafka_topic\"}",
+        "definition": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=~\"$kafka_broker\",topic_name=~\"$kafka_topic\"}",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1122,7 +1122,7 @@
         "name": "kafka_partition",
         "options": [],
         "query": {
-          "query": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=\"$kafka_broker\",topic_name=\"$kafka_topic\"}",
+          "query": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=~\"$kafka_broker\",topic_name=~\"$kafka_topic\"}",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
