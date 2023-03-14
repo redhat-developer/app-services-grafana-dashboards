@@ -674,7 +674,7 @@
       "title": "Available Disk Space",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -802,7 +802,7 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
+        "h": 9,
         "w": 12,
         "x": 12,
         "y": 17
@@ -810,13 +810,19 @@
       "hiddenSeries": false,
       "id": 91,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
         "show": true,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -843,7 +849,7 @@
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{topic_name}}:{{partition_id}}",
+          "legendFormat": "broker {{broker_id}}, topic {{topic_name}}, partition {{partition_id}}",
           "refId": "A"
         }
       ],
@@ -854,9 +860,10 @@
       "title": "Log Size",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
+      "transformations": [],
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -912,6 +919,8 @@
       "legend": {
         "avg": false,
         "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
         "max": false,
         "min": false,
         "show": true,
@@ -943,16 +952,16 @@
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "used {{persistentvolumeclaim}}",
-          "refId": "A"
+          "legendFormat": "Used: {{persistentvolumeclaim}}",
+          "refId": "Used"
         },
         {
           "exemplar": true,
           "expr": "kafka_broker_quota_softlimitbytes{statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}",
           "hide": false,
           "interval": "",
-          "legendFormat": "Limit {{statefulset_kubernetes_io_pod_name}}",
-          "refId": "B"
+          "legendFormat": "Limit: {{statefulset_kubernetes_io_pod_name}}",
+          "refId": "Limit"
         }
       ],
       "thresholds": [],
@@ -962,9 +971,10 @@
       "title": "Used Disk Space",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
+      "transformations": [],
       "type": "graph",
       "xaxis": {
         "buckets": null,
