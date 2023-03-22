@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.5.11"
+      "version": "7.5.17"
     },
     {
       "type": "panel",
@@ -30,8 +30,8 @@
     },
     {
       "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
+      "id": "stat",
+      "name": "Stat",
       "version": ""
     }
   ],
@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1637171817491,
+  "iteration": 1678801740770,
   "links": [],
   "panels": [
     {
@@ -71,26 +71,42 @@
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#d44a3a",
-        "rgba(237, 129, 40, 0.89)",
-        "#299c46"
-      ],
       "datasource": "${DS_PROMETHEUS}",
       "description": "Total incoming byte rate",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "id": 0,
+              "op": "=",
+              "text": "0",
+              "type": 1,
+              "value": "null"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#d44a3a",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 0
+              },
+              {
+                "color": "#299c46",
+                "value": 2
+              }
+            ]
+          },
+          "unit": "binBps"
+        },
         "overrides": []
-      },
-      "format": "Bps",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
       },
       "gridPos": {
         "h": 5,
@@ -101,43 +117,28 @@
       "id": 98,
       "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "0",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "7.5.17",
+      "repeatDirection": "h",
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}[1m]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -146,41 +147,47 @@
           "refId": "A"
         }
       ],
-      "thresholds": "0,2",
       "title": "Total Incoming Byte Rate",
-      "type": "singlestat",
-      "valueFontSize": "200%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "0",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#d44a3a",
-        "rgba(237, 129, 40, 0.89)",
-        "#299c46"
-      ],
       "datasource": "${DS_PROMETHEUS}",
       "description": "Total outgoing byte rate",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "id": 0,
+              "op": "=",
+              "text": "0",
+              "type": 1,
+              "value": "null"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#d44a3a",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 0
+              },
+              {
+                "color": "#299c46",
+                "value": 2
+              }
+            ]
+          },
+          "unit": "binBps"
+        },
         "overrides": []
-      },
-      "format": "Bps",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
       },
       "gridPos": {
         "h": 5,
@@ -191,43 +198,28 @@
       "id": 99,
       "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "7.5.17",
+      "repeatDirection": "h",
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_out_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}[1m]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_out_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -236,18 +228,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": "0,2",
       "title": "Total Outgoing Byte Rate",
-      "type": "singlestat",
-      "valueFontSize": "200%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "0",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "aliasColors": {},
@@ -288,7 +270,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.17",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -299,7 +281,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_messages_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}[1m]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_messages_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}[1m]))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -327,7 +309,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:758",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -336,7 +317,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:759",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -352,26 +332,42 @@
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#d44a3a",
-        "rgba(237, 129, 40, 0.89)",
-        "#299c46"
-      ],
       "datasource": "${DS_PROMETHEUS}",
-      "description": "Incoming messages rate",
+      "description": "Incoming message rate",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "id": 0,
+              "op": "=",
+              "text": "0",
+              "type": 1,
+              "value": "null"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#d44a3a",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 0
+              },
+              {
+                "color": "#299c46",
+                "value": 2
+              }
+            ]
+          },
+          "unit": "msg/s"
+        },
         "overrides": []
-      },
-      "format": "wps",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
       },
       "gridPos": {
         "h": 6,
@@ -382,43 +378,28 @@
       "id": 100,
       "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "7.5.17",
+      "repeatDirection": "h",
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_messages_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}[1m]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_messages_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -427,41 +408,43 @@
           "refId": "A"
         }
       ],
-      "thresholds": "0,2",
-      "title": "Incoming Messages Rate",
-      "type": "singlestat",
-      "valueFontSize": "200%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "0",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
+      "title": "Incoming Message Rate",
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#d44a3a",
-        "rgba(237, 129, 40, 0.89)",
-        "#299c46"
-      ],
       "datasource": "${DS_PROMETHEUS}",
       "description": "Total partitions offline",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "id": 0,
+              "op": "=",
+              "text": "0",
+              "type": 1,
+              "value": "null"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "none"
+        },
         "overrides": []
-      },
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
       },
       "gridPos": {
         "h": 6,
@@ -472,43 +455,28 @@
       "id": 110,
       "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "7.5.17",
+      "repeatDirection": "h",
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(kafka_controller_kafkacontroller_offline_partitions_count{statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"})",
+          "expr": "sum(kafka_controller_kafkacontroller_offline_partitions_count{statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"})",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -517,18 +485,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": "0,2",
       "title": "Offline Partitions Count",
-      "type": "singlestat",
-      "valueFontSize": "200%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "0",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "aliasColors": {},
@@ -573,7 +531,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.17",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -584,7 +542,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}[1m]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_in_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -595,7 +553,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_out_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}[1m]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytes_out_total{topic=~\"$kafka_topic\",topic!=\"\",statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -624,7 +582,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:909",
           "decimals": null,
           "format": "bytes",
           "label": "",
@@ -634,7 +591,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:910",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -654,7 +610,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "${DS_PROMETHEUS}",
-      "description": "Kafka broker pods disk usage",
+      "description": "Kafka broker available space per disk.\n\nLegend label format: data-<disk>-<cluster name>-kafka-<broker ID>",
       "fieldConfig": {
         "defaults": {},
         "overrides": []
@@ -687,7 +643,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.17",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -698,7 +654,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "kubelet_volume_stats_available_bytes{persistentvolumeclaim=~\"data(-[0-9]+)?-$kafka_broker-kafka-[0-9]+\"}",
+          "expr": "kubelet_volume_stats_available_bytes{persistentvolumeclaim=~\"data(-[0-9]+)?-$strimzi_cluster_name-kafka-$kafka_broker\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -714,7 +670,7 @@
       "title": "Available Disk Space",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -727,7 +683,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:346",
           "format": "bytes",
           "label": null,
           "logBase": 1,
@@ -736,7 +691,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:347",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -752,26 +706,42 @@
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#d44a3a",
-        "rgba(237, 129, 40, 0.89)",
-        "#299c46"
-      ],
       "datasource": "${DS_PROMETHEUS}",
-      "description": "Total partitions offline",
+      "description": "Total partitions",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "id": 0,
+              "op": "=",
+              "text": "0",
+              "type": 1,
+              "value": "null"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#d44a3a",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 0
+              },
+              {
+                "color": "#299c46",
+                "value": 2
+              }
+            ]
+          },
+          "unit": "none"
+        },
         "overrides": []
-      },
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
       },
       "gridPos": {
         "h": 7,
@@ -782,43 +752,28 @@
       "id": 111,
       "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "7.5.17",
+      "repeatDirection": "h",
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(kafka_controller_kafkacontroller_global_partition_count)",
+          "expr": "sum(kafka_controller_kafkacontroller_global_partition_count{strimzi_io_cluster=\"$strimzi_cluster_name\"})",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -827,18 +782,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": "0,2",
       "title": "Global Partition Count",
-      "type": "singlestat",
-      "valueFontSize": "200%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "0",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "aliasColors": {},
@@ -853,7 +798,7 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
+        "h": 9,
         "w": 12,
         "x": 12,
         "y": 17
@@ -861,13 +806,19 @@
       "hiddenSeries": false,
       "id": 91,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
         "show": true,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -878,7 +829,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.17",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -889,12 +840,12 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "kafka_topic:kafka_log_log_size:sum",
+          "expr": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=~\"$kafka_broker\",topic_name=~\"$kafka_topic\",partition_id=~\"$kafka_partition\"}",
           "format": "time_series",
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{topic}}:{{partition}}",
+          "legendFormat": "broker {{broker_id}}, topic {{topic_name}}, partition {{partition_id}}",
           "refId": "A"
         }
       ],
@@ -905,9 +856,10 @@
       "title": "Log Size",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
+      "transformations": [],
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -918,7 +870,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:187",
           "format": "bytes",
           "label": null,
           "logBase": 1,
@@ -927,7 +878,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:188",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -965,6 +915,8 @@
       "legend": {
         "avg": false,
         "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
         "max": false,
         "min": false,
         "show": true,
@@ -980,7 +932,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.17",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -991,21 +943,21 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "kubelet_volume_stats_used_bytes{persistentvolumeclaim=~\"data(-[0-9]+)?-$kafka_broker-kafka-[0-9]+\"}",
+          "expr": "kubelet_volume_stats_used_bytes{persistentvolumeclaim=~\"data(-[0-9]+)?-$strimzi_cluster_name-kafka-$kafka_broker\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "used {{persistentvolumeclaim}}",
-          "refId": "A"
+          "legendFormat": "Used: {{persistentvolumeclaim}}",
+          "refId": "Used"
         },
         {
           "exemplar": true,
-          "expr": "kafka_broker_quota_softlimitbytes{statefulset_kubernetes_io_pod_name=~\"$kafka_broker-kafka-[0-9]+\"}",
+          "expr": "kafka_broker_quota_softlimitbytes{statefulset_kubernetes_io_pod_name=~\"$strimzi_cluster_name-kafka-$kafka_broker\"}",
           "hide": false,
           "interval": "",
-          "legendFormat": "Limit {{statefulset_kubernetes_io_pod_name}}",
-          "refId": "B"
+          "legendFormat": "Limit: {{statefulset_kubernetes_io_pod_name}}",
+          "refId": "Limit"
         }
       ],
       "thresholds": [],
@@ -1015,9 +967,10 @@
       "title": "Used Disk Space",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
+      "transformations": [],
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -1028,7 +981,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:346",
           "format": "bytes",
           "label": null,
           "logBase": 1,
@@ -1037,7 +989,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:347",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1062,37 +1013,31 @@
   "templating": {
     "list": [
       {
-        "allValue": null,
-        "current": {},
-        "datasource": "${DS_PROMETHEUS}",
-        "definition": "",
+        "current": {
+          "selected": true,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
         "description": null,
         "error": null,
         "hide": 0,
         "includeAll": false,
-        "label": "Namespace",
+        "label": "Datasource",
         "multi": false,
-        "name": "kubernetes_namespace",
+        "name": "DS_PROMETHEUS",
         "options": [],
-        "query": {
-          "query": "query_result(kafka_server_replicamanager_leadercount)",
-          "refId": "Prometheus-kubernetes_namespace-Variable-Query"
-        },
+        "query": "prometheus",
+        "queryValue": "",
         "refresh": 1,
-        "regex": "/.*namespace=\"([^\"]*).*/",
+        "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "datasource"
       },
       {
         "allValue": null,
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "",
+        "definition": "kafka_instance_connection_limit",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1102,11 +1047,11 @@
         "name": "strimzi_cluster_name",
         "options": [],
         "query": {
-          "query": "query_result(kafka_server_replicamanager_leadercount{namespace=\"$kubernetes_namespace\"})",
-          "refId": "Prometheus-strimzi_cluster_name-Variable-Query"
+          "query": "kafka_instance_connection_limit",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "regex": "/.*strimzi_io_cluster=\"([^\"]*).*/",
+        "regex": "/.*instance_name=\"([^\"]*).*/",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
@@ -1119,7 +1064,7 @@
         "allValue": ".*",
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "",
+        "definition": "kafka_instance_connection_limit{instance_name=\"$strimzi_cluster_name\"}",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1129,11 +1074,11 @@
         "name": "kafka_broker",
         "options": [],
         "query": {
-          "query": "query_result(kafka_server_replicamanager_leadercount{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\"})",
-          "refId": "Prometheus-kafka_broker-Variable-Query"
+          "query": "kafka_instance_connection_limit{instance_name=\"$strimzi_cluster_name\"}",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "regex": "/.*pod_name=\"$strimzi_cluster_name-([^\"]*).*/",
+        "regex": "/.*broker_id=\"([^\"]*).*/",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
@@ -1146,7 +1091,7 @@
         "allValue": ".+",
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "",
+        "definition": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=~\"$kafka_broker\"}",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1156,11 +1101,11 @@
         "name": "kafka_topic",
         "options": [],
         "query": {
-          "query": "query_result(kafka_cluster_partition_replicascount{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"})",
-          "refId": "Prometheus-kafka_topic-Variable-Query"
+          "query": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=~\"$kafka_broker\"}",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "regex": "/.*topic=\"([^\"]*).*/",
+        "regex": "/.*topic_name=\"([^\"]*).*/",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
@@ -1173,7 +1118,7 @@
         "allValue": ".*",
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "",
+        "definition": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=~\"$kafka_broker\",topic_name=~\"$kafka_topic\"}",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1183,11 +1128,11 @@
         "name": "kafka_partition",
         "options": [],
         "query": {
-          "query": "query_result(kafka_log_log_size{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\",topic=~\"$kafka_topic\"})",
-          "refId": "Prometheus-kafka_partition-Variable-Query"
+          "query": "kas_topic_partition_log_size_bytes{strimzi_io_cluster=~\"$strimzi_cluster_name\",broker_id=~\"$kafka_broker\",topic_name=~\"$kafka_topic\"}",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "regex": "/.*partition=\"([^\"]*).*/",
+        "regex": "/.*partition_id=\"([^\"]*).*/",
         "skipUrlSync": false,
         "sort": 3,
         "tagValuesQuery": "",
@@ -1230,5 +1175,5 @@
   "timezone": "",
   "title": "Red Hat OpenShift Streams for Apache Kafka",
   "uid": "86cc98e66c294b299b37102f0cc74ead",
-  "version": 8
+  "version": 10
 }
