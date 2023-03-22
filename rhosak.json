@@ -104,7 +104,7 @@
               }
             ]
           },
-          "unit": "Bps"
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -185,7 +185,7 @@
               }
             ]
           },
-          "unit": "Bps"
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -333,7 +333,7 @@
     {
       "cacheTimeout": null,
       "datasource": "${DS_PROMETHEUS}",
-      "description": "Incoming messages rate",
+      "description": "Incoming message rate",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -365,7 +365,7 @@
               }
             ]
           },
-          "unit": "wps"
+          "unit": "msg/s"
         },
         "overrides": []
       },
@@ -408,7 +408,7 @@
           "refId": "A"
         }
       ],
-      "title": "Incoming Messages Rate",
+      "title": "Incoming Message Rate",
       "type": "stat"
     },
     {
